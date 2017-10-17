@@ -27,6 +27,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    sourceSets{
+        String sharedTestDir = 'src/sharedTest/java'
+
+        test{
+            java.srcDirs += sharedTestDir
+        }
+
+        androidTest{
+            java.srcDirs += sharedTestDir
+        }
+    }
 }
 
 dependencies {
