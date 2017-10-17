@@ -96,18 +96,6 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
-    SessionApi provideSessionApi(Retrofit retrofit){
-        return retrofit.create(SessionApi.class);
-    }
-
-    @Provides
-    @Singleton
-    SessionRepository provideSessionRepository(SessionApi sessionApi){
-        return new AppSessionRepository(sessionApi);
-    }
-
-    @Provides
     SchedulerProvider provideSchedulerProvider(){
         return new AppSchedulerProvider();
     }
