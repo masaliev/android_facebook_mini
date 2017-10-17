@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidFacebookMini</string>
+
+    <string name="api_url">http://192.168.0.8:8090/api/v1/</string>
 </resources>
