@@ -3,6 +3,7 @@ package com.github.masaliev.facebookmini.ui.login;
 import com.github.masaliev.facebookmini.data.local.prefs.PreferencesHelper;
 import com.github.masaliev.facebookmini.data.remote.repository.SessionRepository;
 import com.github.masaliev.facebookmini.ui.base.BaseViewModel;
+import com.github.masaliev.facebookmini.utils.Constants;
 import com.github.masaliev.facebookmini.utils.rx.SchedulerProvider;
 
 /**
@@ -48,7 +49,7 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
             return false;
         }
 
-        if(password == null || password.length() < 6){
+        if(password == null || password.length() < Constants.MIN_PASSWORD_LENGTH){
             return false;
         }
         return true;

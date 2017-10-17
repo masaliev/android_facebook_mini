@@ -7,6 +7,7 @@ import com.github.masaliev.facebookmini.BR;
 import com.github.masaliev.facebookmini.R;
 import com.github.masaliev.facebookmini.databinding.ActivityLoginBinding;
 import com.github.masaliev.facebookmini.ui.base.BaseActivity;
+import com.github.masaliev.facebookmini.ui.signup.SignupActivity;
 
 import org.json.JSONObject;
 
@@ -50,7 +51,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void openSignUpActivity() {
-        //@TODO open sign up page
+        startActivity(SignupActivity.getStartIntent(this));
     }
 
     @Override

@@ -31,7 +31,7 @@ public class SessionInterceptor implements Interceptor {
         String token = mPreferencesHelper.getCurrentUserToken();
         if(token != null && token.length() > 0){
             return chain.proceed(request.newBuilder()
-                    .addHeader("Authorization", "Bearer " + token)
+                    .header("Authorization", "Bearer " + token)
                     .build());
         }
         return chain.proceed(request);

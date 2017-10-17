@@ -10,4 +10,5 @@ import io.reactivex.Observable;
 
 public interface SessionRepository {
     Observable<User> login(String phone, String password);
+    Observable<User> signUp(String fullName, String phone, String password);
 }

@@ -17,4 +17,9 @@ public interface SessionApi {
     @FormUrlEncoded
     @POST("login")
     Observable<User> login(@Field("phone")String phone, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("signup")
+    Observable<User> signUp(@Field("full_name") String fullName, @Field("phone") String phone,
+                            @Field("password") String password);
 }

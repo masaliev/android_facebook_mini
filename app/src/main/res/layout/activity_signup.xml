@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.github.masaliev.facebookmini.ui.signup.SignupViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center">
+            <EditText
+                android:id="@+id/etFullName"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                android:inputType="textCapWords"/>
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Phone"
+                android:inputType="phone"/>
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"/>
+            <EditText
+                android:id="@+id/etRepeatPassword"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:hint="Repeat password"
+                android:inputType="textPassword"/>
+
+            <Button
+                android:id="@+id/btnSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signup"
+                android:enabled="@{viewModel.isSignUpButtonEnabled}"
+                android:onClick="@{() -> viewModel.onClickSignUp()}"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
