@@ -21,8 +21,8 @@ public class AppSessionRepository implements SessionRepository {
     @Override
     public Observable<User> login(final String phone, final String password) {
 
-        return Observable.defer(() -> mSessionApi.login(phone, password)
-                .retryWhen(Helper::getRetryWhenObservable));
+        return Observable.defer(() -> mSessionApi.login(phone, password))
+                .retryWhen(Helper::getRetryWhenObservable);
     }
 
     @Override
