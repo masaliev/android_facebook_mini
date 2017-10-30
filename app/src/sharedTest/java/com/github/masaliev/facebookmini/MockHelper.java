@@ -17,12 +17,13 @@ import retrofit2.Response;
 public class MockHelper {
     public static final String PHONE = "996111000111";
     public static final String PASSWORD = "qwerty";
+    public static final String FULL_NAME = "Test User";
     public static final String TOKEN = "abc123456zxc";
 
     public static User getUser(){
         User user = new User();
         user.phone = PHONE;
-        user.fullName = "Test User";
+        user.fullName = FULL_NAME;
         user.token = TOKEN;
 
         return user;

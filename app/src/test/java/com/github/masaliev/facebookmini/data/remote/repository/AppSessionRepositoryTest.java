@@ -100,4 +100,60 @@ public class AppSessionRepositoryTest {
         verify(mSessionApi, times(3))
                 .login(MockHelper.PHONE, MockHelper.PASSWORD);
     }
+
+    @Test
+    public void signUp_OkResponse_InvokesCorrectApiCalls() throws Exception {
+        //Given
+        List<User> users = new ArrayList<>();
+        when(mSessionApi.signUp(anyString(), anyString(), anyString()))
+                .thenReturn(Observable.just(MockHelper.getUser()));
+
+        //When
+        mSessionRepository.signUp(MockHelper.FULL_NAME, MockHelper.PHONE, MockHelper.PASSWORD)
+                .subscribe(users::add);
+
+        //Then
+        assertEquals(1, users.size());
+        assertEquals(MockHelper.PHONE, users.get(0).phone);
+        assertEquals(MockHelper.TOKEN, users.get(0).token);
+
+        verify(mSessionApi).signUp(MockHelper.FULL_NAME, MockHelper.PHONE, MockHelper.PASSWORD);
+    }
+
+    @Test
+    public void signUp_IOExceptionThenSuccess_SignUpRetried() throws Exception{
+        //Given
+        when(mSessionApi.signUp(anyString(), anyString(), anyString()))
+                .thenReturn(MockHelper.getIOExceptionError(), Observable.just(MockHelper.getUser()));
+        TestObserver<User> observer = new TestObserver<>();
+
+        //When
+        mSessionRepository.signUp(MockHelper.FULL_NAME, MockHelper.PHONE, MockHelper.PASSWORD)
+                .subscribe(observer);
+
+        //Then
+        observer.awaitTerminalEvent();
+        observer.assertNoErrors();
+        verify(mSessionApi, times(2))
+                .signUp(MockHelper.FULL_NAME, MockHelper.PHONE, MockHelper.PASSWORD);
+    }
+
+    @Test
+    public void signUp_IOException_AttemptsThreeTimes() throws Exception {
+        //Given
+        IOException error = new IOException();
+        when(mSessionApi.signUp(anyString(), anyString(), anyString()))
+                .thenReturn(Observable.error(error));
+        TestObserver<User> observer = new TestObserver<>();
+
+        //When
+        mSessionRepository.signUp(MockHelper.FULL_NAME, MockHelper.PHONE, MockHelper.PASSWORD)
+                .subscribe(observer);
+
+        //Then
+        observer.awaitTerminalEvent();
+        observer.assertError(error);
+        verify(mSessionApi, times(3))
+                .signUp(MockHelper.FULL_NAME, MockHelper.PHONE, MockHelper.PASSWORD);
+    }
 }
