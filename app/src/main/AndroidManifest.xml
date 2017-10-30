@@ -22,7 +22,8 @@
         <activity
             android:name=".ui.signup.SignupActivity"
             android:label="@string/signup" />
-        <activity android:name=".ui.main.MainActivity"></activity>
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.upload_photo.UploadPhotoActivity"></activity>
     </application>
 
 </manifest>

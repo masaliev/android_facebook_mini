@@ -28,14 +28,14 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    sourceSets{
+    sourceSets {
         String sharedTestDir = 'src/sharedTest/java'
 
-        test{
+        test {
             java.srcDirs += sharedTestDir
         }
 
-        androidTest{
+        androidTest {
             java.srcDirs += sharedTestDir
         }
     }

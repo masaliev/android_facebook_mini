@@ -12,6 +12,7 @@ import com.github.masaliev.facebookmini.BR;
 import com.github.masaliev.facebookmini.R;
 import com.github.masaliev.facebookmini.databinding.ActivitySignupBinding;
 import com.github.masaliev.facebookmini.ui.base.BaseActivity;
+import com.github.masaliev.facebookmini.ui.upload_photo.UploadPhotoActivity;
 import com.github.masaliev.facebookmini.utils.Constants;
 
 import org.json.JSONObject;
@@ -126,6 +127,6 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
 
     @Override
     public void openUploadPhotoActivity() {
-        //@TODO open upload photo page
+        startActivity(UploadPhotoActivity.getStartIntent(this));
     }
 }
