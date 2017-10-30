@@ -3,9 +3,7 @@ package com.github.masaliev.facebookmini.ui.login;
 import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
-import android.support.test.espresso.Espresso;
 import android.support.test.espresso.intent.Intents;
-import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.text.InputType;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 import com.github.masaliev.facebookmini.App;
 import com.github.masaliev.facebookmini.MockHelper;
 import com.github.masaliev.facebookmini.R;
-import com.github.masaliev.facebookmini.data.model.User;
 import com.github.masaliev.facebookmini.data.remote.repository.SessionRepository;
 import com.github.masaliev.facebookmini.di.component.TestAppComponent;
 import com.github.masaliev.facebookmini.ui.main.MainActivity;
@@ -25,7 +22,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -33,12 +29,6 @@ import java.net.HttpURLConnection;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import okhttp3.MediaType;
-import okhttp3.Protocol;
-import okhttp3.Request;
-import okhttp3.ResponseBody;
-import retrofit2.HttpException;
-import retrofit2.Response;
 
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
@@ -57,6 +47,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
@@ -222,6 +213,19 @@ public class LoginActivityTest {
                 hasFlag(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         ));
         Intents.release();
+    }
+
+    @Test
+    public void login_OkResponse_ActivityFinishing(){
+        //Given
+        when(mSessionRepository.login(anyString(), anyString()))
+                .thenReturn(Observable.just(MockHelper.getUser()));
+
+        //When
+        performLogin();
+
+        //Then
+        assertTrue(mActivityRule.getActivity().isFinishing());
     }
 
     @Test

@@ -59,6 +59,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         Intent intent = MainActivity.getStartIntent(this);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
     }
 
     @Override
