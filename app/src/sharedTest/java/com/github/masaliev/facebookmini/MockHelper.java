@@ -33,6 +33,7 @@ public class MockHelper {
     }
 
     public static HttpException getHttpException(int code, String text){
+        text = "{\"message\": \"" + text + "\"}";
         return new HttpException(Response.error(code, ResponseBody.create(MediaType.parse("application/json"), text)));
     }
 

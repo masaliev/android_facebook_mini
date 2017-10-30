@@ -17,8 +17,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import dagger.android.AndroidInjection;
-
 /**
  * Created by mbt on 10/16/17.
  */
@@ -46,9 +44,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         mViewDataBinding.executePendingBindings();
     }
 
-    public void performDependencyInjection() {
-        AndroidInjection.inject(this);
-    }
+    public abstract void performDependencyInjection();
 
     public T getViewDataBinding() {
         return mViewDataBinding;

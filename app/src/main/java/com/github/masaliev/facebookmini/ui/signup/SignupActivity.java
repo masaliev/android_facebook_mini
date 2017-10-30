@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Toast;
 
+import com.github.masaliev.facebookmini.App;
 import com.github.masaliev.facebookmini.BR;
 import com.github.masaliev.facebookmini.R;
 import com.github.masaliev.facebookmini.databinding.ActivitySignupBinding;
@@ -62,6 +63,11 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
 
         mActivitySignupBinding.etPassword.addTextChangedListener(textWatcher);
         mActivitySignupBinding.etRepeatPassword.addTextChangedListener(textWatcher);
+    }
+
+    @Override
+    public void performDependencyInjection() {
+        App.get(this).getComponent().inject(this);
     }
 
     @Override

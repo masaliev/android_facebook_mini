@@ -12,13 +12,13 @@ import dagger.android.ContributesAndroidInjector;
  * Created by mbt on 10/16/17.
  */
 
-@Module
+//@Module
 public abstract class ActivityBuilder {
 
-    @ContributesAndroidInjector(modules = LoginActivityModule.class)
-    abstract LoginActivity bindLoginActivity();
-
-    @ContributesAndroidInjector(modules = SignupActivityModule.class)
-    abstract SignupActivity bindSignupActivity();
+//    @ContributesAndroidInjector(modules = LoginActivityModule.class)
+//    abstract LoginActivity bindLoginActivity();
+//
+//    @ContributesAndroidInjector(modules = SignupActivityModule.class)
+//    abstract SignupActivity bindSignupActivity();
 
 }

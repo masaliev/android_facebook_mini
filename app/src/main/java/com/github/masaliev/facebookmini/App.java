@@ -1,39 +1,39 @@
 package com.github.masaliev.facebookmini;
 
-import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
+import com.github.masaliev.facebookmini.di.component.AppComponent;
 import com.github.masaliev.facebookmini.di.component.DaggerAppComponent;
-
-import javax.inject.Inject;
-
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
+import com.github.masaliev.facebookmini.di.module.AppModule;
+import com.github.masaliev.facebookmini.di.module.NetworkModule;
 
 /**
  * Created by mbt on 10/13/17.
  */
 
-public class App extends Application implements HasActivityInjector{
+public class App extends Application{
 
+    private AppComponent mComponent;
 
-    @Inject
-    DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
+    public static App get(Context context){
+        return (App) context.getApplicationContext();
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        DaggerAppComponent.builder()
-                .application(this)
-                .build()
-                .inject(this);
-
-
+        mComponent = prepareAppComponent();
     }
 
-    @Override
-    public AndroidInjector<Activity> activityInjector() {
-        return activityDispatchingAndroidInjector;
+    protected AppComponent prepareAppComponent(){
+        return DaggerAppComponent.builder()
+                .appModule(new AppModule(this))
+                .networkModule(new NetworkModule(getString(R.string.api_url)))
+                .build();
+    }
+
+    public AppComponent getComponent(){
+        return mComponent;
     }
 }

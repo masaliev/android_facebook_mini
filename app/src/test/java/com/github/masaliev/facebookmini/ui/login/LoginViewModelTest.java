@@ -88,7 +88,7 @@ public class LoginViewModelTest {
     @Test
     public void login_HttpException_CorrectCalls() throws Exception {
         //Given
-        Throwable throwable = MockHelper.getHttpException(403, "{\"message\": \"some message\"}");
+        Throwable throwable = MockHelper.getHttpException(403, "some message");
         when(mSessionRepository.login(anyString(), anyString()))
                 .thenReturn(Observable.error(throwable));
 

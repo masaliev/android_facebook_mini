@@ -1,8 +1,11 @@
 package com.github.masaliev.facebookmini.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.widget.Toast;
 
+import com.github.masaliev.facebookmini.App;
 import com.github.masaliev.facebookmini.BR;
 import com.github.masaliev.facebookmini.R;
 import com.github.masaliev.facebookmini.databinding.ActivityLoginBinding;
@@ -22,11 +25,18 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     LoginViewModel mLoginViewModel;
     ActivityLoginBinding mActivityLoginBinding;
 
+    private Toast mToast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityLoginBinding = getViewDataBinding();
         mLoginViewModel.setNavigator(this);
+    }
+
+    @Override
+    public void performDependencyInjection() {
+        App.get(this).getComponent().inject(this);
     }
 
     @Override
@@ -46,7 +56,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void openMainActivity() {
-        startActivity(MainActivity.getStartIntent(this));
+        Intent intent = MainActivity.getStartIntent(this);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override
@@ -62,7 +74,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             hideKeyboard();
             mLoginViewModel.login(phone, password);
         }else {
-            Toast.makeText(this, "Пожалуйста, укажите правильный телефон и пароль", Toast.LENGTH_SHORT).show();
+            mToast = Toast.makeText(this, "Пожалуйста, укажите правильный телефон и пароль", Toast.LENGTH_SHORT);
+            mToast.show();
         }
     }
 
@@ -87,6 +100,12 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
                 ignored.printStackTrace();
             }
         }
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        mToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        mToast.show();
+    }
+
+    @VisibleForTesting
+    public Toast getToast(){
+        return mToast;
     }
 }
