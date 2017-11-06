@@ -1,9 +1,12 @@
 package com.github.masaliev.facebookmini.di.module;
 
+import android.content.Context;
+
 import com.github.masaliev.facebookmini.BuildConfig;
 import com.github.masaliev.facebookmini.data.remote.SessionInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
 

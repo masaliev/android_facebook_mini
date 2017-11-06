@@ -1,6 +1,11 @@
 package com.github.masaliev.facebookmini.data.remote.repository;
 
+import android.support.annotation.Nullable;
+
 import com.github.masaliev.facebookmini.data.model.User;
+
+import java.io.File;
+import java.net.URI;
 
 import io.reactivex.Observable;
 
@@ -11,4 +16,5 @@ import io.reactivex.Observable;
 public interface SessionRepository {
     Observable<User> login(String phone, String password);
     Observable<User> signUp(String fullName, String phone, String password);
+    Observable<User> uploadPicture(File file, @Nullable String mediaType);
 }

@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.github.masaliev.facebookmini.ui.upload_photo.UploadPhotoActivity">
+    >
 
-</android.support.constraint.ConstraintLayout>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.github.masaliev.facebookmini.ui.upload_photo.UploadPhotoViewModel"/>
+        <import type="com.github.masaliev.facebookmini.R"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivPicture"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/no_avatar"
+            app:imageUrl="@{viewModel.imagePath}"
+            app:errorDrawable="@{R.drawable.no_avatar}"
+            app:placeholderDrawable="@{R.drawable.no_avatar}"
+            android:onClick="@{() -> viewModel.onClickPicture()}"
+            />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Save"
+            android:onClick="@{() -> viewModel.onClickSave()}"/>
+        
+    </RelativeLayout>
+
+</layout>

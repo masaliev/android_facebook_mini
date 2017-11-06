@@ -8,6 +8,8 @@ import com.github.masaliev.facebookmini.ui.login.LoginActivity;
 import com.github.masaliev.facebookmini.ui.login.LoginActivityModule;
 import com.github.masaliev.facebookmini.ui.signup.SignupActivity;
 import com.github.masaliev.facebookmini.ui.signup.SignupActivityModule;
+import com.github.masaliev.facebookmini.ui.upload_photo.UploadPhotoActivity;
+import com.github.masaliev.facebookmini.ui.upload_photo.UploadPhotoActivityModule;
 
 import javax.inject.Singleton;
 
@@ -24,10 +26,12 @@ import dagger.Component;
         ApiModule.class,
         LoginActivityModule.class,
         SignupActivityModule.class,
+        UploadPhotoActivityModule.class,
 })
 public interface AppComponent {
 
     void inject(LoginActivity activity);
     void inject(SignupActivity activity);
+    void inject(UploadPhotoActivity activity);
 
 }

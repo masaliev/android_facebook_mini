@@ -127,6 +127,9 @@ public class SignupActivity extends BaseActivity<ActivitySignupBinding, SignupVi
 
     @Override
     public void openUploadPhotoActivity() {
+        Intent intent = UploadPhotoActivity.getStartIntent(this);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(UploadPhotoActivity.getStartIntent(this));
+        finish();
     }
 }

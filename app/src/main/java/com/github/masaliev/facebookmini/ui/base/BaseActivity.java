@@ -116,6 +116,30 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         showProgress(null, getString(content));
     }
 
+    public void showConfirmDialog(String title, String content, String positiveText,
+                                  String negativeText, MaterialDialog.SingleButtonCallback callback){
+        hideDialog();
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+                .title(title)
+                .content(content)
+                .cancelable(true)
+                .positiveText(positiveText)
+                .onPositive(callback)
+                .negativeText(negativeText)
+                .onNegative(callback);
+
+        mDialog = builder.build();
+        if(!isFinishing()){
+            mDialog.show();
+        }
+    }
+
+    public void showConfirmDialog(@StringRes int title, @StringRes int content,
+                                  @StringRes int positiveText, @StringRes int negativeText,
+                                  MaterialDialog.SingleButtonCallback callback){
+        showConfirmDialog(getString(title), getString(content), getString(positiveText),
+                getString(negativeText), callback);
+    }
 
 
     /* end dialog */
